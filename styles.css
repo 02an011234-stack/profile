@@ -380,6 +380,10 @@ h1 span {
   border: 1px solid var(--line);
 }
 
+#downloadResumeBtn {
+  color: var(--accent);
+}
+
 .hero-card {
   padding: 1.5rem;
   display: grid;
