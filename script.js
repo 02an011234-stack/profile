@@ -144,8 +144,32 @@ const animateCounters = () => {
 };
 
 const animateBars = () => {
-  barFills.forEach((bar) => {
+  const barMetaStrongs = document.querySelectorAll(".bar-meta strong");
+  
+  barFills.forEach((bar, index) => {
     const width = bar.dataset.width || "0";
+    const target = parseInt(width);
+    const strong = barMetaStrongs[index];
+    const suffix = strong?.dataset.suffix || "%";
+    
+    if (strong) {
+      const duration = 1200;
+      const startTime = performance.now();
+      
+      const step = (now) => {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const value = Math.floor(progress * target);
+        strong.textContent = `${value}${suffix}`;
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        } else {
+          strong.textContent = `${target}${suffix}`;
+        }
+      };
+      
+      window.requestAnimationFrame(step);
+    }
+    
     window.setTimeout(() => {
       bar.style.width = `${width}%`;
     }, 120);
