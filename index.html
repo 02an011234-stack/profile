@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="정보보안 엔지니어 포트폴리오용 반응형 이력서 웹페이지" />
+    <title>Security Engineer Resume</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <canvas id="matrixCanvas" aria-hidden="true"></canvas>
+    <div class="loading-screen" id="loadingScreen">
+      <div class="loader-lock" aria-hidden="true">🔒</div>
+      <div class="loader-bar"></div>
+      <p>Initializing Secure Profile...</p>
+    </div>
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+    <div class="background-orb orb-one"></div>
+    <div class="background-orb orb-two"></div>
+    <div class="toast" id="copyToast" role="status" aria-live="polite"></div>
+
+    <header class="hero container">
+      <nav class="top-nav">
+        <a href="#skills" class="nav-link">Core Skills</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#certs" class="nav-link">Certifications</a>
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="테마 변경">☾</button>
+        <button class="btn btn-secondary small" id="copyEmailBtn" type="button">이메일 복사</button>
+      </nav>
+
+      <div class="hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Information Security Engineer</p>
+          <h1 class="glow-text">
+            <span id="typedText"></span>
+            <span class="typing-cursor" aria-hidden="true">|</span>
+          </h1>
+          <p class="summary">
+            웹 애플리케이션 보안, 네트워크 탐지 대응, 취약점 진단과 보안 아키텍처 설계를 통해
+            서비스 안정성과 고객 신뢰를 동시에 높이는 엔지니어입니다.
+          </p>
+
+          <div class="contact-list">
+            <a href="mailto:security@resume.dev" class="contact-item">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 6h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1Zm0 2 8 5 8-5" />
+              </svg>
+              security@resume.dev
+            </a>
+            <a href="https://github.com/secure-kyu" class="contact-item" target="_blank" rel="noreferrer">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 2a10 10 0 0 0-3.16 19.18c.5.09.68-.22.68-.48V18.2c-2.78.6-3.37-1.34-3.37-1.34-.45-1.15-1.1-1.46-1.1-1.46-.9-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.33 1.08 2.9.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.6 9.6 0 0 1 12 6.8c.85 0 1.71.11 2.51.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .26.18.58.69.48A10 10 0 0 0 22 12c0-5.52-4.48-10-10-10Z" />
+              </svg>
+              GitHub
+            </a>
+            <a href="https://blog.secure-lab.dev" class="contact-item" target="_blank" rel="noreferrer">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm1 5h-2v6l5 3 1-1.73-4-2.27Z" />
+              </svg>
+              Technical Blog
+            </a>
+          </div>
+
+          <div class="cta-row">
+            <a href="#projects" class="btn btn-primary">프로젝트 보기</a>
+            <a href="#certs" class="btn btn-secondary">자격증 보기</a>
+            <button class="btn btn-secondary small" id="downloadResumeBtn" type="button">이력서 다운로드</button>
+          </div>
+        </div>
+
+        <aside class="hero-card reveal interactive">
+          <div class="metric">
+            <strong class="counter" data-target="8" data-suffix="+">0</strong>
+            <span>Years in Security</span>
+          </div>
+          <div class="metric">
+            <strong class="counter" data-target="120" data-suffix="+">0</strong>
+            <span>Vulnerability Assessments</span>
+          </div>
+          <div class="metric">
+            <strong class="counter" data-target="5" data-suffix="">0</strong>
+            <span>Critical Incident Responses</span>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <section class="container highlight-section">
+      <div class="section-card reveal interactive">
+        <div class="section-heading">
+          <p class="eyebrow">Security Focus Areas</p>
+          <h2>실무에서 자주 다루는 보안 우선순위</h2>
+        </div>
+        <div class="highlight-grid">
+          <article class="highlight-card interactive">
+            <h3>Threat Hunting</h3>
+            <p>로그와 네트워크 흐름을 분석해 이상 징후를 조기에 탐지합니다.</p>
+          </article>
+          <article class="highlight-card">
+            <h3>Cloud Security</h3>
+            <p>AWS 기반 인프라의 접근 제어와 보안 구성 상태를 지속적으로 점검합니다.</p>
+          </article>
+          <article class="highlight-card">
+            <h3>Secure SDLC</h3>
+            <p>개발 단계부터 보안을 반영해 배포 전 리스크를 사전에 제거합니다.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="container capability-section">
+      <div class="section-card reveal interactive">
+        <div class="section-heading">
+          <p class="eyebrow">Capability Snapshot</p>
+          <h2>보안 운영에서 실제로 보여주는 성과 지표</h2>
+        </div>
+        <div class="skill-bars">
+          <div class="skill-bar-item">
+            <div class="bar-meta">
+              <span>Application Security</span>
+              <strong data-target="95" data-suffix="%">0%</strong>
+            </div>
+            <div class="bar-track"><span class="bar-fill" data-width="95"></span></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="bar-meta">
+              <span>Cloud & Infra Defense</span>
+              <strong data-target="90" data-suffix="%">0%</strong>
+            </div>
+            <div class="bar-track"><span class="bar-fill" data-width="90"></span></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="bar-meta">
+              <span>Threat Detection</span>
+              <strong data-target="92" data-suffix="%">0%</strong>
+            </div>
+            <div class="bar-track"><span class="bar-fill" data-width="92"></span></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="bar-meta">
+              <span>Incident Response</span>
+              <strong data-target="88" data-suffix="%">0%</strong>
+            </div>
+            <div class="bar-track"><span class="bar-fill" data-width="88"></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="container">
+      <section id="skills" class="section-card reveal interactive">
+        <div class="section-heading">
+          <p class="eyebrow">Core Security Skills</p>
+          <h2>보안 분야를 관통하는 핵심 역량</h2>
+        </div>
+        <div class="skill-groups">
+          <div class="skill-group">
+            <h3>Application / Web Security</h3>
+            <div class="badge-list">
+              <span class="badge interactive">OWASP Top 10</span>
+              <span class="badge interactive">Secure SDLC</span>
+              <span class="badge interactive">API Security</span>
+              <span class="badge interactive">SAST/DAST</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h3>Network & System Security</h3>
+            <div class="badge-list">
+              <span class="badge interactive">Firewall</span>
+              <span class="badge interactive">IDS/IPS</span>
+              <span class="badge interactive">SIEM</span>
+              <span class="badge interactive">Linux Hardening</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h3>Penetration Testing</h3>
+            <div class="badge-list">
+              <span class="badge interactive">Burp Suite</span>
+              <span class="badge interactive">Wireshark</span>
+              <span class="badge interactive">Metasploit</span>
+              <span class="badge interactive">Nmap</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h3>Security Tools</h3>
+            <div class="badge-list">
+              <span class="badge interactive">Splunk</span>
+              <span class="badge interactive">Qualys</span>
+              <span class="badge interactive">Wazuh</span>
+              <span class="badge interactive">Terraform</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="section-card reveal interactive">
+        <div class="section-heading">
+          <p class="eyebrow">Experience & Projects</p>
+          <h2>실무와 프로젝트에서 검증한 보안 성과</h2>
+        </div>
+
+        <div class="timeline-list">
+          <article class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="card-header">
+                <div>
+                  <h3>대외 금융 서비스 모바일 앱 보안 고도화</h3>
+                  <p>Senior Security Engineer · 2023 ~ Present</p>
+                </div>
+                <span class="chip">AppSec</span>
+              </div>
+              <p class="tech-stack">Tooling: Burp Suite, Checkmarx, GitHub Actions, AWS</p>
+              <div class="achievement-block">
+                <h4>Key Achievements</h4>
+                <ul>
+                  <li>로그인/결제 API에 대한 정적·동적 분석을 통해 12건의 취약점을 발견하고 우선순위에 따라 대응 완료.</li>
+                  <li>OWASP ASVS 기반 보안 가이드라인을 적용해 사전 승인 프로세스를 표준화하고 배포 리스크를 38% 감소시켰습니다.</li>
+                  <li>취약점 패치 흐름과 운영 대응 프로세스를 자동화하여 평균 대응 시간을 2주에서 4일로 단축했습니다.</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="card-header">
+                <div>
+                  <h3>기업 내부 SOC 운영 및 사고 대응 체계 구축</h3>
+                  <p>Security Operations Engineer · 2021 ~ 2023</p>
+                </div>
+                <span class="chip">SOC</span>
+              </div>
+              <p class="tech-stack">Tooling: Splunk, Wazuh, Zeek, MITRE ATT&CK</p>
+              <div class="achievement-block">
+                <h4>Key Achievements</h4>
+                <ul>
+                  <li>로그 수집 및 탐지 룰을 재설계해 의심행위 탐지 정확도를 개선하고 3건의 실제 침해 시도를 조기에 차단했습니다.</li>
+                  <li>공격 경로 분석을 통해 내부 계정 도용 시나리오를 재현하고 대응 SOP를 문서화했습니다.</li>
+                  <li>CVE-2023-XXXX 관련 패치 우선순위 기준을 마련해 전사 대응 속도를 향상시켰습니다.</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <div class="card-header">
+                <div>
+                  <h3>사내 웹 서비스 침투 테스트 및 아키텍처 리뷰</h3>
+                  <p>Security Consultant · 2019 ~ 2021</p>
+                </div>
+                <span class="chip">Pentest</span>
+              </div>
+              <p class="tech-stack">Tooling: Nmap, Nessus, Burp Suite, Metasploit</p>
+              <div class="achievement-block">
+                <h4>Key Achievements</h4>
+                <ul>
+                  <li>외부 노출 서비스에 대한 침투 테스트를 수행해 SSRF 및 인증 우회 취약점을 식별하고 즉시 차단했습니다.</li>
+                  <li>보안 아키텍처 리뷰를 통해 서버 간 통신 채널을 분리하고 접근 통제 정책을 강화했습니다.</li>
+                  <li>보고서 기반 리스크 평가로 고객사 경영진에 이해 가능한 보안 개선안 제안을 수행했습니다.</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="certs" class="section-grid">
+        <div class="section-card reveal interactive">
+          <div class="section-heading">
+            <p class="eyebrow">Certifications & Awards</p>
+            <h2>보안 전문성을 증명하는 자격 및 수상 이력</h2>
+          </div>
+          <ul class="list-stack">
+            <li><strong>정보보안기사</strong> · 한국방송통신전파진흥원</li>
+            <li><strong>CEH</strong> · Certified Ethical Hacker</li>
+            <li><strong>AWS Security Specialty</strong> · Cloud Security Operations</li>
+            <li><strong>BoB(Best of the Best) 11기 수료</strong> · 정보보호 실무 역량 강화</li>
+          </ul>
+        </div>
+
+        <div class="section-card">
+          <div class="section-heading">
+            <p class="eyebrow">Bug Bounty / Vulnerability Reports</p>
+            <h2>취약점 제보 이력과 실전 경험</h2>
+          </div>
+          <ul class="list-stack">
+            <li><strong>KISA 취약점 신고</strong> · 인증 세션 관리 취약점 식별 및 대응 제안</li>
+            <li><strong>Private Bug Bounty</strong> · SaaS 플랫폼의 IDOR 및 권한 상승 가능성 보고</li>
+            <li><strong>Responsible Disclosure</strong> · 3건의 보고서를 정식으로 제출하고 보안 패치 완료 확인</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="container footer">
+      <p>© <span id="year"></span> Seoyun Kim · Built with pure HTML, CSS, and JavaScript</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
