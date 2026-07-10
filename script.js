@@ -13,7 +13,7 @@ const barFills = document.querySelectorAll(".bar-fill");
 const canvas = document.getElementById("matrixCanvas");
 const ctx = canvas?.getContext("2d");
 
-const textToType = "시스템의 빈틈을 찾아 안전을 구축하는 정보보안 엔지니어 김서윤입니다.";
+const textToType = "시스템의 빈틈을 찾아 안전을 구축하는 정보보안 엔지니어 안소영입니다.";
 
 const applyTheme = (theme) => {
   document.body.dataset.theme = theme;
