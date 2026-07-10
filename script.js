@@ -52,12 +52,12 @@ copyEmailBtn?.addEventListener("click", async () => {
 });
 
 downloadResumeBtn?.addEventListener("click", () => {
-  const resumeText = `Seoyun Kim\nInformation Security Engineer\nEmail: security@resume.dev\nGitHub: https://github.com/secure-kyu\nSpecialties: Application Security, Cloud Security, Threat Detection, Incident Response`;
+  const resumeText = `Soyoung Ahn\nInformation Security Engineer\nEmail: security@resume.dev\nGitHub: https://github.com/secure-kyu\nSpecialties: Application Security, Cloud Security, Threat Detection, Incident Response`;
   const blob = new Blob([resumeText], { type: "text/plain;charset=utf-8" });
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
-  link.download = "seoyun-kim-resume.txt";
+  link.download = "soyoung-ahn-resume.txt";
   document.body.appendChild(link);
   link.click();
   link.remove();
