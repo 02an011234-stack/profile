@@ -144,35 +144,33 @@ const animateCounters = () => {
 };
 
 const animateBars = () => {
-  const barMetaStrongs = document.querySelectorAll(".bar-meta strong");
+  const barItems = document.querySelectorAll(".skill-bar-item");
   
-  barFills.forEach((bar, index) => {
-    const width = bar.dataset.width || "0";
-    const target = parseInt(width);
-    const strong = barMetaStrongs[index];
-    const suffix = strong?.dataset.suffix || "%";
+  barItems.forEach((item) => {
+    const strong = item.querySelector(".bar-meta strong");
+    const bar = item.querySelector(".bar-fill");
     
-    if (strong) {
+    if (strong && bar) {
+      const target = parseInt(bar.dataset.width || "0");
+      const suffix = strong.dataset.suffix || "%";
       const duration = 1200;
       const startTime = performance.now();
       
-      const step = (now) => {
+      const animateValue = (now) => {
         const progress = Math.min((now - startTime) / duration, 1);
         const value = Math.floor(progress * target);
         strong.textContent = `${value}${suffix}`;
+        
         if (progress < 1) {
-          window.requestAnimationFrame(step);
+          window.requestAnimationFrame(animateValue);
         } else {
           strong.textContent = `${target}${suffix}`;
         }
       };
       
-      window.requestAnimationFrame(step);
+      bar.style.width = `${target}%`;
+      window.requestAnimationFrame(animateValue);
     }
-    
-    window.setTimeout(() => {
-      bar.style.width = `${width}%`;
-    }, 120);
   });
 };
 
